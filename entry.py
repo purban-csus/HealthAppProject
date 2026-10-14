@@ -1,5 +1,5 @@
 
-from workers import WorkerEntrypoint
+from workers import WorkerEntrypoint, Response
 from urllib.parse import urlparse
 
 
@@ -7,6 +7,16 @@ class Default(WorkerEntrypoint):
     async def fetch(self, request):
         # Get the requested URL path
         path = urlparse(request.url).path.rstrip("/")
+
+        # API route: retrieve the current count
+        if path == "/api/count":
+            count = await self.env.DB.prepare(
+                "SELECT count FROM counter WHERE id = 1"
+            ).first("count")
+
+            return Response.json({
+                "count": count
+            })
 
         # Choose which HTML file to serve
         if path == "/about":
