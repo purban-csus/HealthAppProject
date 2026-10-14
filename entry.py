@@ -8,6 +8,8 @@ class Default(WorkerEntrypoint):
         # Get the requested URL path
         path = urlparse(request.url).path.rstrip("/")
 
+        #============================================= API Code ================================================
+        
         # API route: retrieve the current count
         if path == "/api/count":
             count = await self.env.DB.prepare(
@@ -32,7 +34,17 @@ class Default(WorkerEntrypoint):
                 "count": count
             })
 
-        # Choose which HTML file to serve
+                # API route: reset the count to 0
+        if path == "/api/reset" and request.method == "POST":
+            await self.env.DB.prepare(
+                "UPDATE counter SET count = 0 WHERE id = 1"
+            ).run()
+
+            return Response.json({
+                "count": 0
+            })
+
+        #=============================================== HTML Files ===============================================
         if path == "/about":
             file_path = "/about.html"
 
