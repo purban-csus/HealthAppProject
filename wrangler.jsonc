@@ -7,19 +7,21 @@
     "python_workers"
   ],
   "preview_urls": true,
-  "previews": {
-    "d1_databases": [
-      {
-        "binding": "project-db",
-        "database_id": "c39d18f9-c940-4498-9cab-d55d270fd18d"
-      }
-    ]
-  },
+
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "project-db",
+      "database_id": "c39d18f9-c940-4498-9cab-d55d270fd18d"
+    }
+  ],
+
   "observability": {
     "enabled": true
   },
+
   "assets": {
-  "directory": "./public/",
-  "binding": "ASSETS" 
+    "directory": "./public/",
+    "binding": "ASSETS"
   }
 }
