@@ -18,6 +18,20 @@ class Default(WorkerEntrypoint):
                 "count": count
             })
 
+                # API route: add 1 to the count
+        if path == "/api/add" and request.method == "POST":
+            await self.env.DB.prepare(
+                "UPDATE counter SET count = count + 1 WHERE id = 1"
+            ).run()
+
+            count = await self.env.DB.prepare(
+                "SELECT count FROM counter WHERE id = 1"
+            ).first("count")
+
+            return Response.json({
+                "count": count
+            })
+
         # Choose which HTML file to serve
         if path == "/about":
             file_path = "/about.html"
