@@ -1,0 +1,25 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "aged-thunder-eb9a",
+  "main": "src/entry.py",
+  "compatibility_date": "2026-10-06",
+  "compatibility_flags": [
+    "python_workers"
+  ],
+  "preview_urls": true,
+  "previews": {
+    "d1_databases": [
+      {
+        "binding": "project-db",
+        "database_id": "c39d18f9-c940-4498-9cab-d55d270fd18d"
+      }
+    ]
+  },
+  "observability": {
+    "enabled": true
+  },
+  "assets": {
+  "directory": "./public/",
+  "binding": "ASSETS" 
+  }
+}
