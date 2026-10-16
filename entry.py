@@ -48,8 +48,8 @@ class Default(WorkerEntrypoint):
         if path == "/about":
             file_path = "/about.html"
 
-        elif path == "/joanna":
-            file_path = "/joanna.html"
+        elif path == "/JupiterRise":
+            file_path = "/JupiterRise.html"
 
         elif path == "/01":
             file_path = "/01.html"
