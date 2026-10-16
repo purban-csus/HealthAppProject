@@ -6,10 +6,10 @@
 
 
 /*	Rules for every element   */
-body *
+body
 {
 	font-family: Arial, sans-serif;
-	
+	background-color: rgb(50, 50, 50);
 }
 
 
