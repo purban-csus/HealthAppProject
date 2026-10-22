@@ -10,52 +10,14 @@ class Default(WorkerEntrypoint):
 
         #============================================= API Code ================================================
         
-        # API route: retrieve the current count
-        if path == "/api/count":
-            count = await self.env.DB.prepare(
-                "SELECT count FROM counter WHERE id = 1"
-            ).first("count")
 
-            return Response.json({
-                "count": count
-            })
-
-                # API route: add 1 to the count
-        if path == "/api/add" and request.method == "POST":
-            await self.env.DB.prepare(
-                "UPDATE counter SET count = count + 1 WHERE id = 1"
-            ).run()
-
-            count = await self.env.DB.prepare(
-                "SELECT count FROM counter WHERE id = 1"
-            ).first("count")
-
-            return Response.json({
-                "count": count
-            })
-
-                # API route: reset the count to 0
-        if path == "/api/reset" and request.method == "POST":
-            await self.env.DB.prepare(
-                "UPDATE counter SET count = 0 WHERE id = 1"
-            ).run()
-
-            return Response.json({
-                "count": 0
-            })
 
         #=============================================== HTML Files ===============================================
         if path == "/about":
             file_path = "/about.html"
-
-        elif path == "/JupiterRise":
-            file_path = "/JupiterRise.html"
-
-        elif path == "/01":
-            file_path = "/01.html"
-            
-        elif path == "/02":
-            file_path = "/02.html"
+           
+        elif path == "/login":
+            file_path = "/login.html"
 
         else:
             file_path = "/index.html"
