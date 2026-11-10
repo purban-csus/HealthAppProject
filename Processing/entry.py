@@ -13,7 +13,17 @@
 #           the login cookie is set to a blank value and the user is redirected to the login screen 
 
 #   4.===get data===
-#
+#           gets the data from the database
+
+#   5.===set steps===
+#           record the steps data to the SQL database
+
+#   6.===set calories===
+#           record the calories data to the SQL database
+
+#   7.===HTML routing===
+#           redirects the user based on the url
+
 
 
 from workers import WorkerEntrypoint, Response
@@ -156,7 +166,7 @@ class Default(WorkerEntrypoint):
                 "calories": row["calories"]
             })
 
-#=========================================== API record user steps to DB =================================
+#5. =========================================== API record user steps to DB =================================
         
         #on the steps page, the login cookie is used to post data into the correct user_id
         if path == "/api/steps" and request.method == "POST":
@@ -199,7 +209,7 @@ class Default(WorkerEntrypoint):
                 "steps": steps
             })
 
-#=========================================== API record user steps to DB =================================
+#6. =========================================== API record user steps to DB =================================
         
         #on the calories page, the login cookie is used to post data into the correct user_id
         if path == "/api/calories" and request.method == "POST":
@@ -242,7 +252,7 @@ class Default(WorkerEntrypoint):
                 "calories": calories
             })
             
-        #=========================================== HTML Files ===================================================
+#7. =========================================== HTML Files ===================================================
         
         #redirecting based on url ending
         if path == "/about":
