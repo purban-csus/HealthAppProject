@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+	<!--scale the page to the decive width and reference the stylesheet-->
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Create Account</title>
+		<script src="modernizr-1.5.js"></script>
+		<link href="/style.css" rel="stylesheet" />
+	</head>
+
+	<body>
+		<!--the .content is scaled to fit the screen on all devices in the CSS file-->
+		<div class="content">
+			<h1>Create an Account</h1>
+
+			<section>
+				<h2>Do not use real passwords!</h2>
+				<form id="registerForm">
+					<!--forms for creating new account that are passed to the SQL database for storage-->
+					<label for="registerUsername">Username:</label>
+					<input type="text" id="registerUsername" required>
+					<br><br>
+					<label for="registerPassword">Password:</label>
+					<input type="password" id="registerPassword" required>
+					<br><br>
+					<button type="submit">Submit</button>
+					<br><br>
+					<!--link to return to the login page-->
+					<a href="/login">Back to login</a>					
+				</form>
+			</section>
+			
+		</div>
+		<p id="message"></p>
+		
+		<script>
+			document
+				<!--get the object from the registration from-->
+				.getElementById("registerForm")
+				.addEventListener("submit", async function(event) {
+					event.preventDefault();
+					<!--user name is set to the input of the username text box-->
+					const username = document.getElementById("registerUsername").value;
+					<!--password is set to the inout of the password text box-->
+					const password = document.getElementById("registerPassword").value;
+					<!--creates a variable called response to contact the API-->
+					const response = await fetch("/api/register", {
+						method: "POST",
+						headers: {
+							"Content-Type": "application/json"
+						},
+						body: JSON.stringify({
+							username: username,
+							password: password
+						})
+					});
+					<!--convert server response to JS-->
+					const data = await response.json();
+					<!--if the API returned then redirect to login page-->
+					if (data.success) {
+						window.location.href = "/login";
+					<!--else display an error message-->
+					} else {
+						document.getElementById("message").textContent =
+							data.message;
+					}
+				});
+		</script>
+	</body>
+	
+
+</html>
