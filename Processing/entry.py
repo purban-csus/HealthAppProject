@@ -197,7 +197,7 @@ class Default(WorkerEntrypoint):
             await self.env.DB.prepare(
                 """
                 INSERT INTO daily_health (user_id, entry_date, steps)
-                VALUES (?, date('now'), ?)
+                VALUES (?, date('now', '-8 hours'), ?)
                 ON CONFLICT (user_id, entry_date)
                 DO UPDATE SET steps = daily_health.steps + excluded.steps
                 """
@@ -209,7 +209,7 @@ class Default(WorkerEntrypoint):
                 "steps": steps
             })
 
-#6. =========================================== API record user steps to DB =================================
+#6. =========================================== API record user calories to DB =================================
         
         #on the calories page, the login cookie is used to post data into the correct user_id
         if path == "/api/calories" and request.method == "POST":
@@ -240,7 +240,7 @@ class Default(WorkerEntrypoint):
             await self.env.DB.prepare(
                 """
                 INSERT INTO daily_health (user_id, entry_date, calories)
-                VALUES (?, date('now'), ?)
+                VALUES (?, date('now', '-8 hours'), ?)
                 ON CONFLICT (user_id, entry_date)
                 DO UPDATE SET calories = daily_health.calories + excluded.calories
                 """
