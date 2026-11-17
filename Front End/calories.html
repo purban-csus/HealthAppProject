@@ -1,0 +1,71 @@
+<!--This is the page where users enter their calories-->
+
+<!DOCTYPE html>
+<html lang="en">
+	<!--scale the page to the decive width and reference the stylesheet-->
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Calories</title>
+		<script src="modernizr-1.5.js"></script>
+		<link href="/style.css" rel="stylesheet" />
+	</head>
+
+	<!--Content box for entering the calorie count-->
+	<body>
+		<div class="content">
+			<h1>Enter Calories</h1>
+			<p>Enter the calories of the food you ate.</p>
+			<form id="caloriesForm">
+				<input type="number" id="caloriesInput" min="0" required>
+				<button type="submit">Save Calories</button>
+			</form>
+
+			<!--place for any messages that are returned-->
+			<p id="message"></p>
+			 
+		</div>
+		
+		<!--java script for communicating with the Python API-->
+		<script>
+		document
+			.getElementById("caloriesForm")
+			.addEventListener("submit", async function(event) 
+			{
+				event.preventDefault();
+				
+				<!--variable for storing the calorie entered by user-->
+				const calories = Number(document.getElementById("caloriesInput").value);
+
+				<!--sends the calories to the API and waits for a response-->
+				const response = await fetch("/api/calories", 
+				{
+					method: "POST",
+					headers:
+					{
+						"Content-Type": "application/json"
+					},
+					credentials: "same-origin",
+					body: JSON.stringify
+					({
+						calories: calories
+					})
+				});
+
+				<!--if the response was successful, then redirect to home page, if failed, display message from response-->
+				const data = await response.json();
+
+				if (data.success) 
+				{
+					window.location.href = "/home";
+				}
+				else
+				{
+					document.getElementById("message").textContent = data.message;
+				}
+			});
+		</script>
+		
+	</body>
+
+</html>

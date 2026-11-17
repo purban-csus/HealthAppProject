@@ -1,3 +1,5 @@
+<!--This is the page wehre users can create an account-->
+
 <!DOCTYPE html>
 <html lang="en">
 	<!--scale the page to the decive width and reference the stylesheet-->
@@ -34,40 +36,48 @@
 		</div>
 		<p id="message"></p>
 		
+		<!--java script for communicating with the Python API-->
 		<script>
 			document
-				<!--get the object from the registration from-->
 				.getElementById("registerForm")
-				.addEventListener("submit", async function(event) {
+				.addEventListener("submit", async function(event) 
+				{
 					event.preventDefault();
-					<!--user name is set to the input of the username text box-->
+					
+					<!--variables for storing the login and password entered by user-->
 					const username = document.getElementById("registerUsername").value;
-					<!--password is set to the inout of the password text box-->
 					const password = document.getElementById("registerPassword").value;
-					<!--creates a variable called response to contact the API-->
-					const response = await fetch("/api/register", {
+					
+					<!--sends the login and pass to the API and waits for a response-->
+					const response = await fetch("/api/register", 
+					{
 						method: "POST",
-						headers: {
+						headers: 
+						{
 							"Content-Type": "application/json"
 						},
-						body: JSON.stringify({
+						body: JSON.stringify
+						({
 							username: username,
 							password: password
 						})
 					});
-					<!--convert server response to JS-->
+					
+					<!--if the response was successful, then redirect to login page, if failed, display message from response-->
 					const data = await response.json();
-					<!--if the API returned then redirect to login page-->
-					if (data.success) {
+					
+					if (data.success)
+					{
 						window.location.href = "/login";
-					<!--else display an error message-->
-					} else {
-						document.getElementById("message").textContent =
-							data.message;
+					}
+					else
+					{
+						document.getElementById("message").textContent = data.message;
 					}
 				});
+
 		</script>
+		
 	</body>
-	
 
 </html>

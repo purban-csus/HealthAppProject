@@ -1,17 +1,17 @@
 *{
     box-sizing: border-box;
 }
+/*scale the backgroun image to always fit the device height and width*/
 html,
 body{
     margin: 0;
-    min-height: 100%;	
+	min-height: 100vh;
+	background-image: url("images/hills.jpg");
 }
-/*scale the backgroun image to always fit the device height and width*/
+
+/*settings for the all pages */
 body{
-	min-height: 100dvh;
-	min-width: 100%;
     font-family: Arial, sans-serif;
-    background-image: url("images/hills.jpg");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -19,21 +19,22 @@ body{
     justify-content: center;
     align-items: center;
 }
-/*scale the content of the HTML to fit within the devices width minus a few pixels*/
+
+/*scale the content of the dark box to fit within the devices width minus a few pixels*/
 .content{
     background: rgba(0, 0, 0, 0.75);
     color: white;
-    padding: 10px;
     border-radius: 15px;
     text-align: center;
-	padding: 10px 10px;
-	width: calc(100dvw - 10px);
-	max-width: 100%;
+	padding: 15px 15px;
+	width: 100vh;
+	position: relative;
 }
 
 h1 {
     margin-top: 0;
 }
+
 /*styles for the buttons*/
 input,
 button{
@@ -42,46 +43,122 @@ button{
 	border-radius: 5px;
 	border: none;
 }
+
 /*changes cursor to pointer when hovering over button*/
 button{
 	cursor: pointer;	
 }
+
+/*box on the login screen that holds the login and register boxes*/
+.login-box{
+	display: flex;
+	flex-direction: column;
+	flex: 1;
+    align-items: center;
+    justify-content: center;
+	border-radius: 30px;
+}
+
+
 /*style for the boxes on the login screen*/
 .login-layout {
     display: flex;
     align-items: center;
     justify-content: center;
+	min-width: 100%;
     gap: 0px;
 	border: 5px solid rgb(0, 150, 0);
-	border-radius: 50px;
+	border-radius: 30px;
 }
+
 /*style for the text boxes on the login forms*/
 .login-forms {
-    min-width: 200px;
-	padding: 20px;
+	padding: 10px;
 }
+
 /*style for the text boxes on the login forms*/
 .login-forms form {
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
+
 /*style for the text boxes on the login forms*/
 .login-forms input,
 .login-forms button {
     width: 100%;
 }
+
 /*style for the images near the login forms*/
 .login-figure {
-    width: 250px;
+    width: 200px;
     max-width: 40vw;
     height: auto;
     object-fit: contain;
 }
+
 /*style for the image near the register button*/
 .register-figure{
 	width: 120px;
     max-width: 40vw;
     height: auto;
     object-fit: contain;
+}
+
+/*style for the main box on the home screen*/
+.user_layout {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+/*style for the green home screen boxes*/
+.user_data {
+    display: flex;
+	flex: 1;
+	flex-direction: column;
+	min-width: 45%;
+	width: auto;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+	border: 5px solid rgb(0, 150, 0);
+	border-radius: 25px;
+	padding-bottom: 5px;
+}
+
+/*style for the orange user data box*/	
+.user-data-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+	border: 5px solid rgb(237, 145, 33);
+	border-radius: 25px;
+	font-size: 4rem;
+	line-height: 1;
+	min-width: 70%;
+	max-width: 90%;
+    min-height: 70px;
+	max-height: 20vh;
+	padding: 5px 5px;
+}
+/*style for the images on the home screen*/
+.home-figure{
+	width: 60%;
+    max-width: 40vw;
+    height: auto;
+    object-fit: contain;
+}
+/*style for the log out button*/
+.logout-button-box {
+	position: relative;
+}
+/*style for the log out button*/
+.logout-button {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    padding: 5px 12px;
+    font-size: 0.9rem;
 }

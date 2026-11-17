@@ -1,5 +1,8 @@
+<!--This is the home screen page-->
+
 <!DOCTYPE html>
 <html lang="en">
+	<!--scale the page to the decive width and reference the stylesheet-->
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,8 +12,13 @@
 	</head>
 	
 	<body>
+	
 		<!--content container for the main box-->
 		<div class="content">
+			
+			<div class="logout-button-box">
+				<button id="logoutButton" class="logout-button">Log Out</button>
+			</div>
 			
 			<h1>Home</h1>
 			
@@ -25,8 +33,10 @@
 					
 					<!--content in orange boxes-->
 					<div class="user-data-box">
-						<p>1600</p>
+						<span id="caloriesValue">--</span>
 					</div>
+					
+					<button type="button" onclick="window.location.href='/calories'">Update Calories</button>
 					
 				</div>
 				<!--content in green boxes-->
@@ -37,14 +47,55 @@
 					
 					<!--content in orange boxes-->
 					<div class="user-data-box">
-						<p>37</p>
+						<span id="stepsValue">--</span>
 					</div>
+					
+					<button type="button" onclick="window.location.href='/steps'">Update Steps</button>
 					
 				</div>				
 				
 			</div>
 					
 		</div>	
+		
+		<!--script for the log out button-->
+		<script>
+			document
+				.getElementById("logoutButton")
+				.addEventListener("click", async function(){
+					await fetch("/api/logout", {
+						method: "POST",
+						credentials: "same-origin"
+					});
+
+					window.location.href = "/login";
+				});
+		</script>
+		
+		<!--script for loading data from the DB to the page-->
+		<script>
+			async function loadHealthData() 
+			{
+				<!--sends a request to the API to and waits for response-->
+				const response = await fetch("/api/today", 
+				{
+					credentials: "same-origin"
+				});
+
+				<!--if the response was successful, then load the data from the DB into the content boxes-->
+				const data = await response.json();
+
+				if (data.success)
+				{
+					document.getElementById("stepsValue").textContent = data.steps;
+					document.getElementById("caloriesValue").textContent = data.calories;
+				}
+			}
+
+			<!--loads the dealth data-->
+			loadHealthData();
+
+		</script>
 	
 	</body>
 	
