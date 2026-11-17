@@ -147,7 +147,7 @@ class Default(WorkerEntrypoint):
                 SELECT steps, calories
                 FROM daily_health
                 WHERE user_id = ?
-                  AND entry_date = date('now')
+                  AND entry_date = date('now', '-8 hours')
                 """
             ).bind(user_id).first()
 
